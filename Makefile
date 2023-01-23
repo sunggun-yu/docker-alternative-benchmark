@@ -122,7 +122,7 @@ stop.all:
 install:
 	# rancher should install before docker for some conflict issue
 	brew install --cask rancher docker #multipass
-	brew install colima podman gnu-time jq
+	brew install colima podman gnu-time jq coreutils
 
 # ------------------------------------------------------------------------------
 # Docker
