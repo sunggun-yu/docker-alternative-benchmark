@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"time"
 )
 
 func main() {
 	targets := []string{"docker", "rancher", "colima", "podman"}
 	for _, target := range targets {
-		execute(target, 10)
-		time.Sleep(1 * time.Minute)
+		execute(target, 20)
 	}
 }
 
