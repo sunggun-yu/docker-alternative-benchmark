@@ -121,7 +121,7 @@ stop.all:
 .PHONY: install
 install:
 	# rancher should install before docker for some conflict issue
-	brew install --cask rancher docker #multipass
+	brew install --cask rancher docker google-cloud-sdk #multipass
 	brew install colima podman gnu-time jq coreutils
 
 # ------------------------------------------------------------------------------
