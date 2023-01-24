@@ -136,8 +136,8 @@ docker: docker.start
 .PHONY: docker.start
 docker.start: runtime = docker
 docker.start: colima.stop rancher.stop podman.stop
-	$(TIME) open /Applications/Docker.app
-	sleep 10
+	$(TIME) timeout --foreground -s TERM $(TIMEOUT) bash -c \
+	'open /Applications/Docker.app && while [[ $$(docker ps -a > /dev/null 2>&1; echo $$?) = 1 ]]; do echo "starting Docker Desktop" && sleep 0.5; done'
 
 .PHONY: docker.stop
 docker.stop: runtime = docker
@@ -176,7 +176,8 @@ rancher: rancher.start
 .PHONY: rancher.start
 rancher.start: runtime = rancher
 rancher.start: docker.stop colima.stop podman.stop
-	$(TIME) ~/.rd/bin/rdctl start --container-engine=moby --flannel-enabled=false --kubernetes-enabled=false
+	$(TIME) timeout --foreground -s TERM $(TIMEOUT) bash -c \
+	'open /Applications/Rancher\ Desktop.app && while [[ $$(docker ps -a > /dev/null 2>&1; echo $$?) = 1 ]]; do echo "starting Rancher Desktop" && sleep 0.5; done'
 
 .PHONY: rancher.stop
 rancher.stop: runtime = rancher
